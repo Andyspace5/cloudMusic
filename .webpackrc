@@ -1,0 +1,14 @@
+{
+  "extraBabelPlugins": [
+    ["import",{
+      "libraryName": "antd-mobile",
+      "style": true
+    },"antd-mobile"],
+    ["import",{
+      "libraryName": "antd",
+      "style": true
+    },"antd"]
+  ]
+}
+
+
