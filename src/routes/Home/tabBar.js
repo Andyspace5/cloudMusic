@@ -9,17 +9,14 @@ import IconFont from '../../components/IconFont';
 })
 class TabBar extends Component {
   changeTab(id){
-    console.log(id);
     this.props.dispatch({
-      type : "Home/changeTab",
+      type : "home/changeTab",
       payload:{
         id
       }
     })
   }
   render() {
-    console.log(this.props);
-
     const {tabBarData,tabNow} = this.props.home;
     const tabBar = tabBarData.map((item)=>{
       return (

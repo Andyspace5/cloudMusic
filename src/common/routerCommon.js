@@ -1,20 +1,14 @@
-import dynamic from 'dva/dynamic';
 const routerData=[
   {
     key : 'Home',
-    model: 'Home',
+    model: ['Home'],
     component : 'Home'
+  },
+  {
+    key : 'Login',
+    model:['Login'],
+    component : 'Login'
   }
 ];
-export  const dynamicWrap = ({app})=>{
-  return routerData.map(({key,model,component})=>{
-    return {
-      component : dynamic({
-        app,
-        models: () => [import(`../models/${model}`),],
-        component: () => import(`../routes/${component}`)
-      })
-    }
-  });
-}
 
+export default routerData;
