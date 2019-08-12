@@ -21,6 +21,7 @@ export default {
   reducers: {
     loginIn(state,action){
       let data = action.payload;
+      console.log(data)
       let mState;
       if(data.code==200){
         mState ={
@@ -32,10 +33,10 @@ export default {
           loginState : 0,
         };
       }
-      // return {
-      //   ...state,
-      //   ...mState
-      // }
+      return {
+        ...state,
+        ...mState
+      }
     }
   },
 

@@ -1,4 +1,4 @@
-import {getAllTopList,getTopList} from "../services/Home";
+import {getAllTopList,getTopList,getSearchMusic,getMusicUrlApi} from "../services/Home";
 
 export default {
 
@@ -31,7 +31,9 @@ export default {
       }
     ],
     tabNow:"0",
-    topListData:[]
+    topListData:[],
+    searchList:[],
+    musicUrl:""
   },
 
   effects: {
@@ -57,6 +59,24 @@ export default {
           topListData:res["data"]["playlist"]["tracks"]
         }
       })
+    },
+    *searchMusic({payload},{call,put}){
+      const res = yield call(getSearchMusic,payload);
+      yield put({
+        type:"searchListData",
+        payload:{
+          searchList:res.data.result.songs
+        }
+      })
+    },
+    *getMusicUrl({payload},{call,put}){
+      const res = yield call(getMusicUrlApi,payload.id);
+      yield put({
+        type:"musicUrl",
+        payload:{
+          musicUrl:res.data.data[0].url
+        }
+      })
     }
   },
 
@@ -74,6 +94,18 @@ export default {
       }
     },
     getList(state,action){
+      return {
+        ...state,
+        ...action.payload
+      }
+    },
+    searchListData(state,action){
+      return{
+        ...state,
+        ...action.payload
+      }
+    },
+    musicUrl(state,action){
       return {
         ...state,
         ...action.payload

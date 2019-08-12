@@ -13,6 +13,11 @@ const routerData=[
     key : 'Login',
     model:['Login'],
     component : 'Login'
+  },
+  {
+    key : 'Rank',
+    model:['Rank'],
+    component : 'Rank'
   }
 ];
 

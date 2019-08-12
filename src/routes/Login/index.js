@@ -11,15 +11,16 @@ class Login extends Component {
   constructor(props){
     super(props);
     this.state={
-      formDate : ""
+      formDate : []
     }
   }
   submit = () => {
     this.props.form.validateFields((error, value) => {
-      this.setState(()=>{
+      console.log(value);
+      this.setState({
         formDate:value
       },()=>{
-        this.state.formDate;
+
         this.loginIn()
       })
     });
@@ -27,16 +28,18 @@ class Login extends Component {
 
   };
   loginIn(){
+    const {formDate} = this.state;
     this.props.dispatch({
       type : "login/loginIn",
       payload : {
-        phone : this.state.form.phone.replace(/\s+/g,""),
-        password : this.state.form.password.replace(/\s+/g,"")
+        phone : formDate.phone.replace(/\s+/g,""),
+        password : formDate.password.replace(/\s+/g,"")
       }
     })
   }
   render() {
     console.log(this.props);
+    console.log(this.state);
     const { getFieldProps } = this.props.form;
     return (
       <div>

@@ -4,7 +4,7 @@ import dynamic from 'dva/dynamic';
 import routerData from './common/routerCommon';
 
 function RouterConfig({ history,app }) {
-  console.log(routerData);
+  // console.log(routerData);
   const dynamicWarp = routerData.map(({key,model,component})=>{
     let path ={
       key : key,
