@@ -8,19 +8,33 @@ import {List,InputItem,Button} from 'antd-mobile';
   }
 })
 class Login extends Component {
-
+  constructor(props){
+    super(props);
+    this.state={
+      formDate : ""
+    }
+  }
   submit = () => {
-
     this.props.form.validateFields((error, value) => {
-      this.props.dispatch({
-        type : "login/loginIn",
-        payload : {
-          phone : value.phone.replace(/\s+/g,""),
-          password : value.password.replace(/\s+/g,"")
-        }
+      this.setState(()=>{
+        formDate:value
+      },()=>{
+        this.state.formDate;
+        this.loginIn()
       })
     });
+
+
   };
+  loginIn(){
+    this.props.dispatch({
+      type : "login/loginIn",
+      payload : {
+        phone : this.state.form.phone.replace(/\s+/g,""),
+        password : this.state.form.password.replace(/\s+/g,"")
+      }
+    })
+  }
   render() {
     console.log(this.props);
     const { getFieldProps } = this.props.form;

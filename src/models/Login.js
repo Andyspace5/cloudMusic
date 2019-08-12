@@ -2,36 +2,40 @@ import {LoginIn} from '../services/Login';
 export default {
   namespace: 'login',
   state: {
-    loginState:{
-      state : 0,
-      reqText:""
-    }
+    loginState:0,
+    userInfo:[]
   },
 
   effects: {
     *loginIn({payload},{put,call}){
+
       const res = yield call(LoginIn,payload);
-      console.log(res);
-      // if (res.err) return res;
-      // yield put({
-      //   type : "loginIn",
-      //   payload:{
-      //     loginState:{
-      //       state : 0,
-      //       reqText:""
-      //     }
-      //   }
-      // })
+      yield put({
+        type : "loginIn",
+        payload:res.data
+      })
     }
 
   },
 
   reducers: {
     loginIn(state,action){
-      return {
-        ...state,
-        ...action.payload
+      let data = action.payload;
+      let mState;
+      if(data.code==200){
+        mState ={
+          loginState : 1,
+          userInfo : data
+        };
+      }else{
+        mState ={
+          loginState : 0,
+        };
       }
+      // return {
+      //   ...state,
+      //   ...mState
+      // }
     }
   },
 
