@@ -1,8 +1,10 @@
-import {queryRank} from '../services/Rank';
+import {routerRedux} from 'dva/router'
+import {queryRank,queryArank} from '../services/Rank';
 export default {
-  namespace: "Rank",
+  namespace: "rank",
   state:{
-    initListData:[]
+    initListData:[],
+    aRankListData:[]
   },
   effects:{
     *getRankData({payload},{call,put}){
@@ -13,6 +15,16 @@ export default {
           initListData : res.data.list
         }
       })
+    },
+    *openRankList({payload},{call,put}){
+      const res = yield call(queryArank,payload.idx);
+      yield put({
+        type:"saveArankList",
+        payload:{
+          aRankListData : res.data.playlist
+        }
+      })
+      yield put(routerRedux.push('/Arank'))
     }
   },
   reducers:{
@@ -21,6 +33,13 @@ export default {
         ...state,
         ...action.payload
       }
+    },
+    saveArankList(state,action){
+      return{
+        ...state,
+        ...action.payload
+      }
     }
+
   }
 }

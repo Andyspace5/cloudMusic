@@ -18,6 +18,11 @@ const routerData=[
     key : 'Rank',
     model:['Rank'],
     component : 'Rank'
+  },
+  {
+    key : 'Arank',
+    model:['Rank','Home'],
+    component : 'Rank/Arank'
   }
 ];
 
