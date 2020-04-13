@@ -1,32 +1,11 @@
-import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
-import dynamic from 'dva/dynamic';
-import routerData from './common/routerCommon';
+import Vue from 'vue'
+import Router from 'vue-router'
+import routerConfig from '@/router/routerConfig'
 
-function RouterConfig({ history,app }) {
-  // console.log(routerData);
-  const dynamicWarp = routerData.map(({key,model,component})=>{
-    let path ={
-      key : key,
-      component : dynamic({
-        app,
-        models: () =>model.map((item)=>item!==""&&import(`./models/${item}`)),
-        component: () => import(`./routes/${component}`)
-      })
-    };
-    return path;
-  });
-  return (
-    <Router history={history}>
-      <Switch>
-        {
-          dynamicWarp.map(({key,component})=>{
-            return  <Route path={`/${key}`} key={key} exact component={component} />
-          })
-        }
-      </Switch>
-    </Router>
-  );
-}
+Vue.use(Router)
 
-export default RouterConfig;
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: routerConfig
+})

@@ -1,9 +1,9 @@
-import request from "../utils/request";
-import {host, port} from "../utils/constant";
+import request from '../utils/request'
 
-export function queryRank(id) {
-  return request(`${host}${port}/toplist`);
+export function getAllTopList() {
+  return request('get', `/toplist`)
 }
-export function queryArank(idx) {
-  return request(`${host}${port}/top/list?idx=${idx}`);
+
+export function getTopList(type) {
+  return request('get',`/top/list?idx=${type}`)
 }
